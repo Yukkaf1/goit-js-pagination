@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.weatherForecast {
+    &_week-info-grid {
+        display: grid;   
+        padding-top: 10px;
+    }
+    
+    &_item {
+        display: grid;   
+        grid-template-columns: 45% 55%;
+        font-size: 18px;
+        align-items: end;
+
+        padding-top: 5px;
+        padding-bottom: 5px;
+}
+
+     &_item-a {
+        display: grid;   
+        grid-column-start: 1;
+        grid-column-end: end;
+        text-align: center;
+        font-weight: bold;
+        font-size: 18px;
+        align-items: end;
+
+        padding-top: 10px;
+}
+
+
+&_item-info {
+    margin: 0;
+    padding-right: 15px;
+    align-items: end;
+}
+
+&_item-temp {
+    margin: 0;
+    padding: 0px;
+    text-align: center;
+}
+
+        &_weatherBtn {
+            margin-top: 18px;
+            padding: 8px 14px;
+            
+            font-size: 16px;
+            color: white;
+            background: rgba(254, 254, 255, 0.3);
+            border-radius: 10px;
+            border: none;
+            text-align: center;
+            }
+            
+            &_weatherBtn:hover {
+              background-color: rgba(254, 254, 255, 0.5);
+            }
+    }
+    
+    @media screen and (min-width: 786px) {
+        .weatherForecast {
+    
+            &_item {
+                font-size: 20px; 
+            }
+
+            &_item-a {
+                font-size: 22px;  
+            }
+
+            &_weatherBtn {
+                font-size: 20px;
+                margin-top: 28px;
+                padding: 9px 12px;
+            }
+    }
+    }
+
+
+    

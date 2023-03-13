@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+
+.hidden{
+    display: none;
+}
+
+.weatherBlock {
+&_main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    background:#4440F7;
+    color: white;
+    background-size: cover;
+    background-position: center;
+    box-sizing: border-box;
+    border-radius: 4px;
+    
+   
+    padding-top: 32px;
+    padding-bottom: 32px;
+
+    // 
+    width: 288px;
+    height: 489px;
+    min-height: 100%;
+    
+}
+
+
+&_weather-name {
+    display: flex;
+    align-items: center;
+
+}
+
+&_city {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 40px 8%;
+    border-radius: 20px;
+    background: rgba(250, 250, 250, 0.85);
+    box-shadow: 10px 10px 5px 0px rgba(15, 15, 15, 0.404);
+
+}
+
+&_city-temp {
+    display: flex;
+    flex-shrink: 0;
+    font-size: 55px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin: 0;
+    color: white;
+    text-align: center;
+    padding-right: 8px;
+    width: 45%;
+
+    transition-property: height, width, background-color;
+    transition: 250ms top cubic-bezier(0.4, 0, 0.2, 1);transition: 250ms top cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+&_temp-sup {
+    padding-top: 10px;
+    top: 0%;
+    vertical-align: super;
+
+}
+
+&_city-info {
+    display: flex;
+    flex: 1;
+    align-content: space-between;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: baseline;
+    flex-direction: column;
+    border-color: #fff currentColor #fff #fff;
+    border-left-style: solid;
+    border-right-width: 2px;
+    padding-left: 15px;
+
+}
+
+&_city-name {
+    font-size: 14px;
+    padding: 0;
+    margin: 0;
+    color: white;
+    background: rgba(254, 254, 255, 0.3);
+    border-radius: 10px;
+    border: none;
+    padding: 10px 17px 10px 10px;
+
+}
+
+
+&_weather-name::before {
+    content: '';
+    width: 27px;
+    height: 27px ;
+    background: url('../img/carbon_location-filled.svg') no-repeat center/contain;
+    margin-right: 4px;
+
+}
+
+
+&_info-icon {
+    display: flex;
+    object-fit: contain;
+    height: 121px;
+    margin: auto;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+&_city-icon {
+    margin-top: 10px;
+    width: 165px;
+    height: 158px;
+}
+
+&_weather-nav {
+    flex-flow: column wrap;
+    place-content: space-between flex-end;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    margin-left: 53px;
+    margin-right: 53px;
+}
+
+&_clean {
+flex: 1 1 auto;
+}
+
+&_weather-description {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    margin: 0;
+    text-transform: capitalize;
+
+}
+
+&_weatherBtn {
+margin-top: 18px;
+padding: 8px 14px;
+
+font-size: 16px;
+color: white;
+background: rgba(254, 254, 255, 0.3);
+border-radius: 10px;
+border: none;
+text-align: center;
+}
+
+&_weatherBtn:hover {
+  background-color: rgba(254, 254, 255, 0.5);
+}
+
+&_info-date {
+    font-size: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+
+&_info-down {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+&_Btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+}
+
+@media screen and (min-width: 786px) {
+    .weatherBlock {
+        &_main-container {
+
+        padding-top: 40px;
+        padding-bottom: 60px;
+    }
+
+    &_city-temp {
+        font-size: 64px;
+    }
+
+    &_city-name {
+        font-size: 20px;
+    }
+
+    &_weather-description {
+        font-size: 36px;
+    }
+
+    &_weather-name::before {
+        content: '';
+        width: 27px;
+        height: 27px;
+        margin-right: 8px;
+
+    }
+
+    &_info-icon {
+       height: 158px;
+    }
+
+    &_info-date {
+        font-size: 36px;
+    }
+
+    &_weatherBtn {
+        
+        font-size: 20px;
+        margin-top: 28px;
+        padding: 9px 12px;
+    }
+
+}
+}
+
+
+@media screen and (min-width: 1280px) {
+    .weatherBlock {
+
+    &_info-date {
+        font-size: 46px;
+        
+    }
+}
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project</title>
+
+    
+    <div id="root">
+      <div class="news__weather">
+        <!-- <div class="weatherBlock_main-container" id="weather-loader"></div> -->
+        <div class="weatherBlock_main-container" id="weather-block">
+          <div class="weatherBlock_weather-nav">
+            <div class="weatherBlock_city-temp">
+              <span id="weather-block-temp"></span>
+              <sup class="weatherBlock_temp-sup">&deg;</sup>
+            </div>
+  
+            <div class="weatherBlock_city-info">
+              <p class="weatherBlock_weather-description" id="weather-block-description"></p>
+              <p class="weatherBlock_city-name">
+                <span class="weatherBlock_weather-name" id="weather-block-name"></span>
+              </p>
+            </div>
+          </div>
+          <div class="weatherBlock_clean" id="for-day">
+            <div class="weatherBlock_info-icon" id="weather-block-icon"></div>
+  
+            <div class="weatherBlock_info-down">
+              <p class="weatherBlock_info-date" id="weather-block-date"></p>
+            </div>
+          </div>
+          <div class="weatherBlock_clean weatherBlock_hidden" id="for-week"></div>
+          <div class="weatherBlock_Btn">
+            <button type="button" class="weatherBlock_weatherBtn" id="load-weather-button">weather for week</button>
+          </div>
+        </div>
+
+
+    </div>
+
+  </head>
+  <body>
+
+    <form class="search-form" id="search-form">
+      <input class="input" type="text" name="searchQuery" placeholder="Search images..." />
+      <button class="searchButton" type="submit">Search</button>
+    </form>
+    <div class="gallery">
+    </div>
+    <div class="center-button">
+      <button type="button" class="load-more is-hidden" id="load-more">Load more</button>
+    </div>
+    <div id="paginator" class="pagination-list">
+      <ul id="paginator__pages-list"></ul>
+    </div>
+  
+    <script src="index.js" type="module"></script>
+  </body>
+</html>
