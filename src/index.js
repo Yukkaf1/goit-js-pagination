@@ -26,10 +26,10 @@ let page = 1;
   const gallery = document.querySelector('.gallery');
 
   async function fetchPicture(clientRequest, page) {
-    let caunt = 10;
+
       try {
       return axios.get(
-       `${ BASE_URL}/?key=${KEY}&q=${clientRequest}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${caunt}`
+       `${ BASE_URL}/?key=${KEY}&q=${clientRequest}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=40`
   )}
   catch (error) {
     console.log('ERROR: ' , error);
@@ -48,11 +48,12 @@ let page = 1;
 function onSearch(event) {
     event.preventDefault();
     gallery.innerHTML = '';
-    loadBtn.classList.add('is-hidden');
+    // loadBtn.classList.add('is-hidden');
+    
     const input = inputForm.value.trim();
     if (input.length !== 0) {
       page = 1;
-      fetchPicture(input, page + 2)
+      fetchPicture(input, page)
         .then(renderGallery)
         .catch(error => {});
     }
@@ -156,37 +157,37 @@ function onSearch(event) {
 
 // ------------------------- Paginator --------------------------
 
-async function getData() {
-  const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-  const data = await response.json();
-  return data;
-}
+// async function getData() {
+//   const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+//   const data = await response.json();
+//   return data;
+// }
 
 async function main() {
-  const postsData = await getData();
+  // const postsData = await getData();
   let currentPage = 1;
   let rows = 10;
 
-  function displayList(arrData, rowPerPage, page) {
-    const postsEl = document.querySelector('.posts');
-    postsEl.innerHTML = "";
-    page--;
+  // function displayList(arrData, rowPerPage, page) {
+  //   const postsEl = document.querySelector('.posts');
+  //   postsEl.innerHTML = "";
+  //   page--;
 
-    const start = rowPerPage * page;
-    const end = start + rowPerPage;
-    const paginatedData = arrData.slice(start, end);
+  //   const start = rowPerPage * page;
+  //   const end = start + rowPerPage;
+  //   const paginatedData = arrData.slice(start, end);
 
-    paginatedData.forEach((el) => {
-      const postEl = document.createElement("div");
-      postEl.classList.add("post");
-      postEl.innerText = `${el.title}`;
-      postsEl.appendChild(postEl);
-    })
-  }
+  //   paginatedData.forEach((el) => {
+  //     const postEl = document.createElement("div");
+  //     postEl.classList.add("post");
+  //     postEl.innerText = `${el.title}`;
+  //     postsEl.appendChild(postEl);
+  //   })
+  // }
 
   function displayPagination(arrData, rowPerPage) {
     const paginationEl = document.querySelector('.pagination');
-    const pagesCount = Math.ceil(arrData.length / rowPerPage);
+    const pagesCount = arrData / rowPerPage);
     const ulEl = document.createElement("ul");
     ulEl.classList.add('pagination__list');
 
@@ -217,8 +218,8 @@ async function main() {
     return liEl;
   }
 
-  displayList(postsData, rows, currentPage);
-  displayPagination(postsData, rows);
+  // displayList(postsData, rows, currentPage);
+  // displayPagination(postsData, rows);
 }
 
 main();
