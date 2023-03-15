@@ -5,9 +5,6 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 import axios from 'axios';
-import geoWeatherApp from './appWeather';
-import searchPagination from './paginator';
-
 
 
 const BASE_URL = 'https://pixabay.com/api/';
@@ -24,6 +21,7 @@ let page = 1;
   const loadBtn = document.querySelector('#load-more');
   const searchForm = document.querySelector('#search-form');
   const gallery = document.querySelector('.gallery');
+  const paginationEl = document.querySelector('#paginator');
 
   async function fetchPicture(clientRequest, page) {
 
@@ -48,7 +46,7 @@ let page = 1;
 function onSearch(event) {
     event.preventDefault();
     gallery.innerHTML = '';
-    // loadBtn.classList.add('is-hidden');
+    loadBtn.classList.add('is-hidden');
     
     const input = inputForm.value.trim();
     if (input.length !== 0) {
@@ -57,20 +55,21 @@ function onSearch(event) {
         .then(renderGallery)
         .catch(error => {});
     }
+    main()
   };
 
   function renderGallery(images) {
-    // let totalPage = images.data.totalHits/40;  
-    // loadBtn.classList.remove('is-hidden');
+    let totalPage = images.data.totalHits/40;  
+    loadBtn.classList.remove('is-hidden');
 
-    // if (images.data.totalHits === 0) {
-    //   Notiflix.Notify.failure(
-    //     'Sorry, there are no images matching your search query. Please try again.'
-    //   );
-    //   gallery.innerHTML = '';
-    // }
-    // if (images.data.totalHits !== 0) {
-    //   Notiflix.Notify.success(`Hooray! We found ${images.data.totalHits} images.`);
+    if (images.data.totalHits === 0) {
+      Notiflix.Notify.failure(
+        'Sorry, there are no images matching your search query. Please try again.'
+      );
+      gallery.innerHTML = '';
+    }
+    if (images.data.totalHits !== 0) {
+      Notiflix.Notify.success(`Hooray! We found ${images.data.totalHits} images.`);
       const markup = images.data.hits
         .map(
           ({
@@ -97,97 +96,84 @@ function onSearch(event) {
         .join('');
       gallery.insertAdjacentHTML('beforeend', markup);
       lightbox.refresh();
-    //   loadBtn.classList.remove('is-hidden');
-    // }
-    // if (page > totalPage) {
-    //     loadBtn.classList.add('is-hidden'); 
-    // }
+      loadBtn.classList.remove('is-hidden');
+    }
+    if (page > totalPage) {
+        loadBtn.classList.add('is-hidden'); 
+    }
   }
 
 
-  // function loadGallery(images) {
-  //   let totalPage = images.data.totalHits/40;  
+  function loadGallery(images) {
+    let totalPage = images.data.totalHits/40;  
 
-  //   if (images.data.totalHits !== 0) {
-  //     Notiflix.Notify.success(`Hooray! We found ${images.data.totalHits} images.`);
-  //     const markup = images.data.hits
-  //       .map(
-  //         ({
-  //           largeImageURL,
-  //           webformatURL,
-  //           tags,
-  //           likes,
-  //           views,
-  //           comments,
-  //           downloads,
-  //         }) => {
-  //           return `
-  //               <div class="photo-card">
-  //               <a href='${largeImageURL}'><img src="${webformatURL}" alt="${tags}" loading="lazy" width=310 height=205/></a>
-  //               <div class="info">
-  //                 <p class="info-item"><b>Likes</b>${likes}</p>
-  //                 <p class="info-item"><b>Views</b>${views}</p>
-  //                 <p class="info-item"><b>Comments</b>${comments}</p>
-  //                 <p class="info-item"><b>Downloads</b>${downloads}</p>
-  //               </div>
-  //             </div>`;
-  //         }
-  //       )
-  //       .join('');
-  //     gallery.insertAdjacentHTML('beforeend', markup);
-  //     lightbox.refresh();
-  //       }
-  //       if (page > totalPage) {
-  //           Notiflix.Notify.warning("We're sorry, but you've reached the end of search results.")
-  //           loadBtn.classList.add('is-hidden')}
-  // }
+    if (images.data.totalHits !== 0) {
+      Notiflix.Notify.success(`Hooray! We found ${images.data.totalHits} images.`);
+      const markup = images.data.hits
+        .map(
+          ({
+            largeImageURL,
+            webformatURL,
+            tags,
+            likes,
+            views,
+            comments,
+            downloads,
+          }) => {
+            return `
+                <div class="photo-card">
+                <a href='${largeImageURL}'><img src="${webformatURL}" alt="${tags}" loading="lazy" width=310 height=205/></a>
+                <div class="info">
+                  <p class="info-item"><b>Likes</b>${likes}</p>
+                  <p class="info-item"><b>Views</b>${views}</p>
+                  <p class="info-item"><b>Comments</b>${comments}</p>
+                  <p class="info-item"><b>Downloads</b>${downloads}</p>
+                </div>
+              </div>`;
+          }
+        )
+        .join('');
+      gallery.insertAdjacentHTML('beforeend', markup);
+      lightbox.refresh();
+        }
+        if (page > totalPage) {
+            Notiflix.Notify.warning("We're sorry, but you've reached the end of search results.")
+            loadBtn.classList.add('is-hidden')}
+  }
 
-  // function onLoadBtn(images) {
-  //   const input = inputForm.value.trim();
-  //     fetchPicture(input, (page += 1))
-  //       .then(loadGallery)
-  //       .catch(error => {});
-  // }
+  function onLoadBtn(images) {
+    const input = inputForm.value.trim();
+    console.log('ввод onLoadBtn', input)
+      fetchPicture(input, (page += 1))
+        .then(loadGallery)
+        .catch(error => {});
+  }
   
-  // loadBtn.addEventListener('click', onLoadBtn)
+  loadBtn.addEventListener('click', onLoadBtn)
 
   searchForm.addEventListener('submit', onSearch);
 
 
 
-// ------------------------- Paginator --------------------------
-
-// async function getData() {
-//   const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-//   const data = await response.json();
-//   return data;
-// }
+// // ------------------------- Paginator --------------------------
 
 async function main() {
-  const postsData = await fetchPicture();
+
+  const input = inputForm.value.trim();
+  console.log('ввод main', input)
+  if(input.length !== 0) {
+  console.log('старт пагинация')
   let currentPage = 1;
 
 
-  // function displayList(arrData, rowPerPage, page) {
-  //   const postsEl = document.querySelector('.posts');
-  //   postsEl.innerHTML = "";
-  //   page--;
+    fetchPicture(input)
+    .then(displayPagination)
 
-  //   const start = rowPerPage * page;
-  //   const end = start + rowPerPage;
-  //   const paginatedData = arrData.slice(start, end);
 
-  //   paginatedData.forEach((el) => {
-  //     const postEl = document.createElement("div");
-  //     postEl.classList.add("post");
-  //     postEl.innerText = `${el.title}`;
-  //     postsEl.appendChild(postEl);
-  //   })
-  // }
+  function displayPagination(images) {
 
-  function displayPagination() {
-    const paginationEl = document.querySelector('.pagination');
-    const pagesCount = 5;
+    const pagesCount = images.data.totalHits/40;
+    console.log('всего страниц', pagesCount)
     const ulEl = document.createElement("ul");
     ulEl.classList.add('pagination__list');
 
@@ -198,6 +184,8 @@ async function main() {
     paginationEl.appendChild(ulEl)
   }
 
+
+
   function displayPaginationBtn(page) {
     const liEl = document.createElement("li");
     liEl.classList.add('pagination__item')
@@ -207,7 +195,12 @@ async function main() {
 
     liEl.addEventListener('click', () => {
       currentPage = page
-      displayList(postsData, rows, currentPage)
+      gallery.innerHTML ='';
+      lightbox.refresh();
+
+      fetchPicture(input, currentPage)
+      .then(renderGallery)
+      .catch(error => {})
 
       let currentItemLi = document.querySelector('li.pagination__item--active');
       currentItemLi.classList.remove('pagination__item--active');
@@ -221,5 +214,6 @@ async function main() {
   // displayList(postsData, rows, currentPage);
   displayPagination();
 }
+return
+}
 
-main();
