@@ -164,9 +164,9 @@ function onSearch(event) {
 // }
 
 async function main() {
-  // const postsData = await getData();
+  const postsData = await fetchPicture();
   let currentPage = 1;
-  let rows = 10;
+
 
   // function displayList(arrData, rowPerPage, page) {
   //   const postsEl = document.querySelector('.posts');
@@ -185,9 +185,9 @@ async function main() {
   //   })
   // }
 
-  function displayPagination(arrData, rowPerPage) {
+  function displayPagination() {
     const paginationEl = document.querySelector('.pagination');
-    const pagesCount = arrData / rowPerPage);
+    const pagesCount = 5;
     const ulEl = document.createElement("ul");
     ulEl.classList.add('pagination__list');
 
@@ -219,7 +219,7 @@ async function main() {
   }
 
   // displayList(postsData, rows, currentPage);
-  // displayPagination(postsData, rows);
+  displayPagination();
 }
 
 main();
